@@ -1,0 +1,15 @@
+<center>
+
+<h1> Your current collection:</h1><br><br>
+<% if @sneakers %>
+    <% @sneakers.each do |sneaker| %>
+    <h2><a href=<%="/users/#{current_user.id}/sneakers/#{sneaker.id}"%>><%= "#{sneaker.brand.split.map(&:capitalize).join(' ')}, #{sneaker.model.split.map(&:capitalize).join(' ')}" %></a></h2><br>
+   <% end %>
+  <% else %>
+  <h2> Please add a sneaker to begin </h2>
+  <% end %>
+
+<button onclick="window.location.href = '/new'">Add Sneaker</button><br><br>
+<a href=<%="/users/#{current_user.id}/logout"%>><button> Log Out </button></a>
+
+</center>
