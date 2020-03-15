@@ -1,10 +1,18 @@
 
 <center>
 <h3>Sign Up</h3>
+<% if @user && @user.errors.any?%>
+<% @user.errors.full_messages.each do |m|%>
+<p><%= m %><p>
+	<%end%>
+<%end%>
 <form action="/signup" method="POST">
-	<input type="text" name="username" placeholder="Username:" required><br><br>
-    <input type="text" name="email" placeholder="Email:" required><br><br>
-	<input type="password" name="password" placeholder="Password:" required><br><br>
+	<input type="text" id="username" name="username" placeholder="Username:" ><br><br>
+   <input type="email" id="email" name="email" placeholder="Email"><br><br>
+	<input type="password" id="password" name="password" placeholder="Password" ><br><br>
 	<input type="submit" value="Sign Up">
+	
+
+
 </form>
 </center>

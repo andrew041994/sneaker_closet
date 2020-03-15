@@ -20,8 +20,8 @@ class ApplicationController < Sinatra::Base
         if @user.save
             session[:user_id] = @user.id
         redirect "/users/#{@user.id}"
-        else
-            redirect '/signup'
+        else           
+            erb :sign_up
         end
 
     end
@@ -37,7 +37,8 @@ class ApplicationController < Sinatra::Base
             session[:user_id] = @user.id
             redirect "/users/#{@user.id}"
         else
-            redirect '/login'
+            @user = "not found"
+            erb :log_in
         end
 
     end
@@ -66,10 +67,10 @@ class ApplicationController < Sinatra::Base
     end
 
     post '/new' do
-    @sneaker = current_user.sneakers.new(brand: params[:brand], model: params[:model],
-     color: params[:color], size: params[:size])
-     @sneaker.save
-  redirect "/users/#{session[:user_id]}"
+        @sneaker = current_user.sneakers.new(brand: params[:brand], model: params[:model],
+        color: params[:color], size: params[:size])
+        @sneaker.save
+        redirect "/users/#{session[:user_id]}"
     end
 
     get '/users/:user_id/sneakers/:sneaker_id/delete' do
@@ -87,12 +88,11 @@ class ApplicationController < Sinatra::Base
 
     helpers do
         def logged_in?
-            redirect '/login' unless session[:user_id]
-                  
+            redirect '/login' unless session[:user_id]                  
 		end
 
 		def current_user
-		@user = User.find_by_id(session[:user_id])
+		    @user = User.find_by_id(session[:user_id])
         end
         
         def redirect_if_no_access
