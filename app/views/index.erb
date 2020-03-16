@@ -1,9 +1,11 @@
 <center>
-
-<h1> Your current collection:</h1><br><br>
-<% if @sneakers %>
+<h1><%= "Welcome #{@user.username}"%></h1>
+<h2> Your current collection:</h2><br><br>
+<% if @sneakers%>
     <% @sneakers.each do |sneaker| %>
-    <h2><a href=<%="/users/#{current_user.id}/sneakers/#{sneaker.id}"%>><%= "#{sneaker.brand.split.map(&:capitalize).join(' ')}, #{sneaker.model.split.map(&:capitalize).join(' ')}" %></a></h2><br>
+    <h2><a href=<%="/users/#{current_user.id}/sneakers/#{sneaker.id}"%>>
+    <%= "#{sneaker.brand.split.map(&:capitalize).join(' ')}, 
+    #{sneaker.model.split.map(&:capitalize).join(' ')}" %></a></h2><br>
    <% end %>
   <% else %>
   <h2> Please add a sneaker to begin </h2>

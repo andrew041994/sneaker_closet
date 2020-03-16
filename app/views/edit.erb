@@ -1,0 +1,25 @@
+
+<center>
+<form method="POST" action=<%="/users/#{current_user.id}/sneakers/#{params[:sneaker_id]}"%>>
+  <input id="hidden" type="hidden" name="_method" value="PATCH" />
+
+  <h3>
+  <label for="brand">Brand</label>
+  <input type="text" id="brand" name="brand" value="<%=@sneaker.brand%>" required /><br><br>
+
+  <label for="model">Model</label>
+  <input type="text" id="model" name="model" value="<%=@sneaker.model%>" required/><br><br>
+  
+  <label for="color">Color</label>
+  <input type="text" id="color" name="color" value="<%=@sneaker.color%>" required/><br><br>
+
+  <label for="size">Size</label>
+  <input type="text" id="size" name="size" value="<%=@sneaker.size%>" required/><br><br>
+  </h3>
+
+  <input type="submit" value="submit" /><br><br>
+</form>
+
+<a href=<%="/users/#{current_user.id}/sneakers/#{@sneaker.id}"%>><button> Back </button></a>
+
+</center>

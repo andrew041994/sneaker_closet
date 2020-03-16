@@ -5,9 +5,9 @@ class ApplicationController < Sinatra::Base
 		enable :sessions
 		set :session_secret, "password_security"
 	end
-
+    # Create
     get '/' do 
-    erb :home_page
+        erb :home_page
     end
 
     get '/signup' do 
@@ -43,25 +43,6 @@ class ApplicationController < Sinatra::Base
 
     end
 
-    get '/users/:id' do
-
-        redirect_if_no_access
-        @sneakers = current_user.sneakers             
-			erb :index
-    end
-
-    get '/users/:id/sneakers/:sneaker_id' do
-        redirect_if_no_access
-        @sneaker = current_user.sneakers.find_by_id(params[:sneaker_id])
-            
-        if @sneaker
-
-          erb :show
-        else
-            redirect "/users/#{session[:user_id]}"
-        end
-    end
-
     get '/new' do 
         erb :new
     end
@@ -73,9 +54,48 @@ class ApplicationController < Sinatra::Base
         redirect "/users/#{session[:user_id]}"
     end
 
-    get '/users/:user_id/sneakers/:sneaker_id/delete' do
+    # Read
+
+    get '/users/:id' do
+
+        redirect_if_no_access
+        @sneakers = current_user.sneakers             
+			erb :index
+    end
+
+    get '/users/:id/sneakers/:sneaker_id' do
+        redirect_if_no_access
+        @sneaker = current_user.sneakers.find_by_id(params[:sneaker_id])
+
+        if @sneaker
+          erb :show
+        else
+            redirect "/users/#{session[:user_id]}"
+        end
+    end
+
+    # Update
+    
+    get '/users/:id/sneakers/:sneaker_id/edit' do
+        @sneaker = Sneaker.find(params[:sneaker_id])
+        erb :edit
+    end
+
+ 
+    patch "/users/:id/sneakers/:sneaker_id" do
         @sneaker = Sneaker.find_by_id(params[:sneaker_id])
-        @sneaker.destroy 
+        @sneaker.brand = params[:brand]
+        @sneaker.model = params[:model]
+        @sneaker.color = params[:color]
+        @sneaker.size = params[:size]
+        @sneaker.save
+        redirect to "/users/#{session[:user_id]}"
+    end
+
+    # Delete
+    
+    delete '/users/:id/sneakers/:sneaker_id/delete' do
+        Sneaker.destroy(params[:sneaker_id])
        redirect "/users/#{session[:user_id]}"
     end
 
