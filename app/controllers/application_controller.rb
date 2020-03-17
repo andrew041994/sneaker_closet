@@ -4,7 +4,13 @@ class ApplicationController < Sinatra::Base
 		set :views, "app/views"
 		enable :sessions
 		set :session_secret, "password_security"
-	end
+    end
+
+    not_found do
+        status 404
+        erb :oops
+      end
+    
     # Create
     get '/' do 
         erb :home_page
@@ -93,7 +99,7 @@ class ApplicationController < Sinatra::Base
     end
 
     # Delete
-    
+
     delete '/users/:id/sneakers/:sneaker_id/delete' do
         Sneaker.destroy(params[:sneaker_id])
        redirect "/users/#{session[:user_id]}"
@@ -104,6 +110,8 @@ class ApplicationController < Sinatra::Base
 
         redirect '/'
       end
+
+
 
 
     helpers do
