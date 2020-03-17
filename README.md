@@ -1,8 +1,7 @@
 # SneakerCloset
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sneaker_closet`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to your virtual sneaker closet!!
+For all the times when you are out shopping, see a sneaker you like but just can't remember if you already have it or not. This application allows you to add all of your sneakers to your profile and have that information at your finger tips.
 
 ## Installation
 
@@ -22,7 +21,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+-Create a user profile
+-Start adding sneakers
 
 ## Development
 
