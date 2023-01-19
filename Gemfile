@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 gem "sinatra"
-gem "activerecord", '<= 5.1'
+gem "activerecord", '<= 6.2'
 gem "sinatra-activerecord"
 gem "rake"
 gem "bcrypt"
